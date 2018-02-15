@@ -1,0 +1,21 @@
+body {
+    background-color: $background;
+    line-height: 1.4;
+}
+
+h1.header {
+    color: $headers;
+    font-family: $headerFont;
+    padding: 15px;
+}
+
+p.slogan {
+    color: $text;
+    font-family: $textFont;
+    font-size:20px;
+    
+}
+
+img {
+    border: 1px solid $imageBorder;
+}

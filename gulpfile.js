@@ -37,10 +37,6 @@ gulp.task('original', () => {
     gulp.src('components/images/*.{jpg,png}')
     .pipe(imageResize({
         '*': [{
-            width: 375,
-            rename: {
-                extname: '.jpg',
-            },
         }],
     }, {
         quality: 70,
@@ -49,24 +45,11 @@ gulp.task('original', () => {
     .pipe(gulp.dest('builds/development/images/'));
 });
 
-gulp.task('resizeXtraSmall', () => {
-    gulp.src('components/images/*.{jpg,png}')
-    .pipe(imageResize({
-        '*': [{
-            width: 375,
-        }],
-    }, {
-        quality: 70,
-        progressive: true,
-    }))
-    .pipe(gulp.dest('builds/development/images/xtraSmall'));
-});
-
 gulp.task('resizeSmall', () => {
     gulp.src('components/images/*.{jpg,png}')
     .pipe(imageResize({
         '*': [{
-            width: 480,
+            width: 576,
         }],
     }, {
         quality: 70,
@@ -92,7 +75,7 @@ gulp.task('resizeLarge', () => {
     gulp.src('components/images/*.{jpg,png}')
     .pipe(imageResize({
         '*': [{
-            width: 1024,
+            width: 992,
         }],
     }, {
         quality: 70,
@@ -101,22 +84,27 @@ gulp.task('resizeLarge', () => {
     .pipe(gulp.dest('builds/development/images/large'));
 });
 
-gulp.task('resize', ['original', 'resizeXtraSmall', 'resizeSmall', 'resizeMedium', 'resizeLarge']);
+gulp.task('resizeXL', () => {
+    gulp.src('components/images/*.{jpg,png}')
+    .pipe(imageResize({
+        '*': [{
+            width: 1200,
+        }],
+    }, {
+        quality: 70,
+        progressive: true,
+    }))
+    .pipe(gulp.dest('builds/development/images/xl'));
+});
+
+gulp.task('resize', ['original', 'resizeSmall', 'resizeMedium', 'resizeLarge', 'resizeXL']);
 
 
 
 gulp.task('watermark', () => {
-    gulp.src('builds/development/images/xtraSmall/*.jpg')
-    .pipe(watermark({
-        image: "components/watermarks/375.png",
-        resize: '100x100',
-        gravity: 'NorthEast'
-    }))
-    .pipe(gulp.dest('builds/development/images/xtraSmall'))
-    
     gulp.src('builds/development/images/small/*.jpg')
     .pipe(watermark({
-        image: "components/watermarks/480.png",
+        image: "components/watermarks/576.png",
         resize: '100x100',
         gravity: 'NorthEast'
     }))
@@ -132,11 +120,19 @@ gulp.task('watermark', () => {
     
     gulp.src('builds/development/images/large/*.jpg')
     .pipe(watermark({
-        image: "components/watermarks/1024.png",
+        image: "components/watermarks/992.png",
         resize: '100x100',
         gravity: 'NorthEast'
     }))
     .pipe(gulp.dest('builds/development/images/large'))
+    
+    gulp.src('builds/development/images/xl/*.jpg')
+    .pipe(watermark({
+        image: "components/watermarks/1200.png",
+        resize: '100x100',
+        gravity: 'NorthEast'
+    }))
+    .pipe(gulp.dest('builds/development/images/xl'))
     
 });
 
@@ -148,7 +144,7 @@ gulp.task(
         }), {
             transform: function(filepath) {
                 if (filepath.slice(-4) === '.jpg') {
-                    return '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(max-width: 40em) 100vw, 50vw" srcset="images/xtraSmall/' + filepath.slice(27) + ' 375w, images/small/' + filepath.slice(27) + ' 478w, images/medium/' + filepath.slice(27) + ' 768, images/large/' + filepath.slice(27) + ' 1024w"></div>';
+                    return '<div class="col-4 col-sm-6"><picture><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(max-width: 1400px) 100vw, 1400px" srcset="images/small/' + filepath.slice(27) + ' 576w, images/medium/' + filepath.slice(27) + ' 768w, images/large/' + filepath.slice(27) + ' 992, images/xl/' + filepath.slice(27) + ' 1200w"></picture></div>';
                 }
                 return inject.transform.apply(inject.transform, arguments);
             }

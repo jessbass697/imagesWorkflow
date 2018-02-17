@@ -21,10 +21,17 @@ gulp.task('compass', function() {
         .pipe(gulp.dest('builds/development/css'))
 });
 
-gulp.task('remove', () => {
+gulp.task('removeImages', () => {
     gulp.src('builds/development/images', {read: false})
     .pipe(remove());
 });
+
+gulp.task('removeHtml', () => {
+    gulp.src('builds/development/index.html', {read: false})
+    .pipe(remove());
+});
+
+gulp.task('remove', ['removeImages', 'removeHtml']);
 
 gulp.task('original', () => {
     gulp.src('components/images/*.{jpg,png}')
@@ -94,6 +101,10 @@ gulp.task('resizeLarge', () => {
     .pipe(gulp.dest('builds/development/images/large'));
 });
 
+gulp.task('resize', ['original', 'resizeXtraSmall', 'resizeSmall', 'resizeMedium', 'resizeLarge']);
+
+
+
 gulp.task('watermark', () => {
     gulp.src('builds/development/images/xtraSmall/*.jpg')
     .pipe(watermark({
@@ -129,8 +140,6 @@ gulp.task('watermark', () => {
     
 });
 
-gulp.task('resize', ['original', 'resizeXtraSmall', 'resizeSmall', 'resizeMedium', 'resizeLarge']);
-
 gulp.task(
     'inject', () => {
         return gulp.src('components/html/index.html')
@@ -139,7 +148,7 @@ gulp.task(
         }), {
             transform: function(filepath) {
                 if (filepath.slice(-4) === '.jpg') {
-                    return '<div class="col-lg-4"><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(max-width: 40em) 100vw, 50vw" srcset="images/xtraSmall/' + filepath.slice(27) + ' 375w, images/small/' + filepath.slice(27) + ' 478w, images/medium/' + filepath.slice(27) + ' 768, images/large/' + filepath.slice(27) + ' 1024w"></div>';
+                    return '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-6"><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(max-width: 40em) 100vw, 50vw" srcset="images/xtraSmall/' + filepath.slice(27) + ' 375w, images/small/' + filepath.slice(27) + ' 478w, images/medium/' + filepath.slice(27) + ' 768, images/large/' + filepath.slice(27) + ' 1024w"></div>';
                 }
                 return inject.transform.apply(inject.transform, arguments);
             }

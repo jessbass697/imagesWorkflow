@@ -144,7 +144,7 @@ gulp.task(
         }), {
             transform: function(filepath) {
                 if (filepath.slice(-4) === '.jpg') {
-                    return '<div class="col-12 col-sm-6 col-xl-4"><picture><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(max-width: 75em) 33.3vw, (min-width: 36em) 50vw, 100vw" srcset="images/small/' + filepath.slice(27) + ' 576w, images/medium/' + filepath.slice(27) + ' 768w, images/large/' + filepath.slice(27) + ' 992w, images/xl/' + filepath.slice(27) + ' 1200w">   </picture></div>';
+                    return '<div class="col-12 col-sm-6 col-xl-4"><picture><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(min-width: 1200px) 33.3vw, (min-width: 576px) 50vw, 100vw" srcset="images/small/' + filepath.slice(27) + ' 576w, images/medium/' + filepath.slice(27) + ' 768w, images/large/' + filepath.slice(27) + ' 992w, images/xl/' + filepath.slice(27) + ' 1200w">   </picture></div>';
                 }
                 return inject.transform.apply(inject.transform, arguments);
             }

@@ -1,10 +1,13 @@
 const gulp = require('gulp'),
       inject = require('gulp-inject'),
       imageResize = require('gulp-responsive'),
-        gutil = require('gulp-util'),
-        remove = require('gulp-clean'),
-        watermark = require('gulp-watermark'),
-        gm = require('gulp-gm'),
+      gutil = require('gulp-util'),
+      remove = require('gulp-clean'),
+      watermark = require('gulp-watermark'),
+      gm = require('gulp-gm'),
+      exif = require('gulp-exif'),
+      data = require('gulp-data'),
+      extend = require('gulp-extend'),
       compass = require('gulp-compass');
 
 sassSources = ['components/sass/style.scss'];
@@ -41,6 +44,7 @@ gulp.task('original', () => {
     }, {
         quality: 70,
         progressive: true,
+        withMetadata: true,
     }))
     .pipe(gulp.dest('builds/development/images/'));
 });
@@ -151,6 +155,19 @@ gulp.task(
         }))
         .pipe(gulp.dest('builds/development'))
     }
-)
+);
+
+gulp.task('exif', () => {
+    gulp.src('builds/development/images/*.jpg')
+    .pipe(exif())
+    .pipe(data(function(file) {
+        let filename = file.path.substring(file.path.lastIndexOf('/') + 1),
+            data = {};
+        data[filename] = file.exif.description.title;
+        file.contents = new Buffer(JSON.stringify(data));
+    }))
+    .pipe(extend('author.json', true, '    '))
+    .pipe(gulp.dest('builds/development'));
+});
 
 

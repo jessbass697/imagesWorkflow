@@ -19,3 +19,20 @@ p.slogan {
 img {
   border: 1px solid #ffbf00;
 }
+
+.filter-button {
+  font-size: 18px;
+  color: #ffbf00;
+  background-color: #000000;
+  border-radius: 5px;
+  text-align: center;
+  font-family: "Neuton", Lucida Sans, sans-serif;
+}
+
+.filter-button:hover {
+  border: 1px solid #ffbf00;
+}
+
+.btn-default:active .filter-button:active {
+  border: 1px solid #ffbf00;
+}

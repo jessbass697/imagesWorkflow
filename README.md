@@ -93,10 +93,15 @@ Project on the importance of workflows in Front-End Development and how they inc
             -css
             -images
             -js
+            -json
         -production
     -components
+        -html
+        -images
+        -watermarks
         -sass
-        -scripts
+    gulpfile.js
+    package.json
 ```
         
 ## Setup your package.json file

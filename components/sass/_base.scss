@@ -19,3 +19,20 @@ p.slogan {
 img {
     border: 1px solid $imageBorder;
 }
+
+.filter-button {
+    font-size: 18px;
+    color: $imageBorder;
+    background-color: $background;
+    border-radius: 5px;
+    text-align: center;
+    font-family: $textFont;
+}
+
+.filter-button:hover {
+    border: 1px solid $imageBorder;
+}
+
+.btn-default:active .filter-button:active {
+    border: 1px solid $imageBorder;
+}

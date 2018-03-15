@@ -12,6 +12,7 @@ const gulp = require('gulp'),
 
 sassSources = ['components/sass/style.scss'];
 
+
 gulp.task('compass', function() {
     gulp.src(sassSources)
         .pipe(compass({
@@ -148,10 +149,10 @@ gulp.task(
         }), {
             transform: function(filepath) {
                 if (filepath.slice(-4) === '.jpg') {
-                    return '<div class="col-12 col-sm-6 col-xl-4"><picture><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(min-width: 1200px) 33.3vw, (min-width: 576px) 50vw, 100vw" srcset="images/small/' + filepath.slice(27) + ' 576w, images/medium/' + filepath.slice(27) + ' 768w, images/large/' + filepath.slice(27) + ' 992w, images/xl/' + filepath.slice(27) + ' 1200w">   </picture></div>';
+                    return '<div class="gallery_product .col col-sm-6 col-xl-4 filter banksy"><picture><a class="image-link" href="images/large/' + filepath.slice(27) + '"><img class="img-fluid" src="images/' + filepath.slice(27) + '" sizes="(min-width: 1200px) 33.3vw, (min-width: 576px) 50vw, (min-width: 575px) 100vw" srcset="images/small/' + filepath.slice(27) + ' 576w, images/medium/' + filepath.slice(27) + ' 768w, images/large/' + filepath.slice(27) + ' 992w, images/xl/' + filepath.slice(27) + ' 1200w"></a></picture></div>';
                 }
                 return inject.transform.apply(inject.transform, arguments);
-            }
+            },
         }))
         .pipe(gulp.dest('builds/development'))
     }
@@ -163,7 +164,9 @@ gulp.task('exif', () => {
     .pipe(data(function(file) {
         let filename = file.path.substring(file.path.lastIndexOf('/') + 1),
             data = {};
-        data[filename] = file.exif.description.title;
+        data[filename] = {};
+        data[filename]['Artist'] = file.exif.image.Artist;
+              
         file.contents = new Buffer(JSON.stringify(data));
     }))
     .pipe(extend('author.json', true, '    '))

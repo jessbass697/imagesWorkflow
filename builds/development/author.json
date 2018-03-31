@@ -1,27 +1,27 @@
 {
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\aj.jpg": {
-        "artist": "Sam Dean"
+        "Artist": "Sam Dean"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\ali.jpg": {
-        "artist": "Joshua Ritchie"
+        "Artist": "Joshua Ritchie"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\avengers.jpg": {
-        "artist": "Stan Lee"
+        "Artist": "Stan Lee"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\back.jpg": {
-        "artist": "Christopher McCarthy"
+        "Artist": "Christopher McCarthy"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy1.jpg": {
-        "artist": "Banksy"
+        "Artist": "Banksy"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy2.jpg": {
-        "artist": "Banksy"
+        "Artist": "Banksy"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy3.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy4.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy5.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\banksy6.jpg": {
-        "artist": "Stan Lee"
+        "Artist": "Stan Lee"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\brucelee.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\captainamerica.jpg": {},
@@ -35,7 +35,7 @@
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\hulk.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\ironman.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\johnCash.jpg": {
-        "artist": "Sam Dean"
+        "Artist": "Sam Dean"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\jonjones.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\london.jpg": {},
@@ -43,10 +43,10 @@
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\silva.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\spiderman.jpg": {},
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\taylor.jpg": {
-        "artist": "John Till"
+        "Artist": "John Till"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\tkd.jpg": {
-        "artist": "Bong Medez"
+        "Artist": "Bong Medez"
     },
     "C:\\Users\\baz-8\\Desktop\\imageWorkflow\\builds\\development\\images\\ufc.jpg": {}
 }

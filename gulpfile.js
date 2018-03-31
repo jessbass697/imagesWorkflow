@@ -13,7 +13,7 @@ const gulp = require('gulp'),
 sassSources = ['components/sass/style.scss'];
 
 
-gulp.task('compass', function() {
+gulp.task('compass', () => {
     gulp.src(sassSources)
         .pipe(compass({
          css:  'builds/development/css',
@@ -114,7 +114,7 @@ gulp.task('watermark', () => {
         gravity: 'NorthEast'
     }))
     .pipe(gulp.dest('builds/development/images/small'))
-    
+
     gulp.src('builds/development/images/medium/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/768.png",
@@ -122,7 +122,7 @@ gulp.task('watermark', () => {
         gravity: 'NorthEast'
     }))
     .pipe(gulp.dest('builds/development/images/medium'))
-    
+
     gulp.src('builds/development/images/large/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/992.png",
@@ -130,7 +130,7 @@ gulp.task('watermark', () => {
         gravity: 'NorthEast'
     }))
     .pipe(gulp.dest('builds/development/images/large'))
-    
+
     gulp.src('builds/development/images/xl/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/1200.png",
@@ -138,7 +138,7 @@ gulp.task('watermark', () => {
         gravity: 'NorthEast'
     }))
     .pipe(gulp.dest('builds/development/images/xl'))
-    
+
 });
 
 gulp.task(
@@ -166,11 +166,9 @@ gulp.task('exif', () => {
             data = {};
         data[filename] = {};
         data[filename]['Artist'] = file.exif.image.Artist;
-              
+
         file.contents = new Buffer(JSON.stringify(data));
     }))
     .pipe(extend('author.json', true, '    '))
     .pipe(gulp.dest('builds/development'));
 });
-
-

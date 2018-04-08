@@ -8,7 +8,8 @@ const gulp = require('gulp'),
       exif = require('gulp-exif'),
       data = require('gulp-data'),
       extend = require('gulp-extend'),
-      compass = require('gulp-compass');
+      compass = require('gulp-compass'),
+      htmlmin = require('gulp-htmlmin');
 
 sassSources = ['components/sass/style.scss'];
 
@@ -19,7 +20,7 @@ gulp.task('compass', () => {
          css:  'builds/development/css',
             sass: 'components/sass',
             image: 'builds/development/images',
-            style: 'expanded'
+            style: 'compressed'
     })
             .on('error', gutil.log))
         .pipe(gulp.dest('builds/development/css'))
@@ -110,36 +111,37 @@ gulp.task('watermark', () => {
     gulp.src('builds/development/images/small/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/576.png",
-        resize: '100x100',
-        gravity: 'NorthEast'
+        resize: '500x200',
+        gravity: 'Center'
     }))
     .pipe(gulp.dest('builds/development/images/small'))
 
     gulp.src('builds/development/images/medium/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/768.png",
-        resize: '100x100',
-        gravity: 'NorthEast'
+        resize: '500x200',
+        gravity: 'Center'
     }))
     .pipe(gulp.dest('builds/development/images/medium'))
 
     gulp.src('builds/development/images/large/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/992.png",
-        resize: '100x100',
-        gravity: 'NorthEast'
+        resize: '500x200',
+        gravity: 'Center'
     }))
     .pipe(gulp.dest('builds/development/images/large'))
 
     gulp.src('builds/development/images/xl/*.jpg')
     .pipe(watermark({
         image: "components/watermarks/1200.png",
-        resize: '100x100',
-        gravity: 'NorthEast'
+        resize: '500x200',
+        gravity: 'Center'
     }))
     .pipe(gulp.dest('builds/development/images/xl'))
 
 });
+
 
 gulp.task(
     'inject', () => {
@@ -162,13 +164,23 @@ gulp.task('exif', () => {
     gulp.src('builds/development/images/*.jpg')
     .pipe(exif())
     .pipe(data(function(file) {
-        let filename = file.path.substring(file.path.lastIndexOf('/') + 1),
+        let filename = file.path.substring(file.path.lastIndexOf('/') +64),
             data = {};
         data[filename] = {};
         data[filename]['Artist'] = file.exif.image.Artist;
+        data[filename]['Date'] = file.exif.image.ModifyDate;
+        data[filename]['Resolution'] = file.exif.thumbnail.XResolution;
 
         file.contents = new Buffer(JSON.stringify(data));
     }))
-    .pipe(extend('author.json', true, '    '))
+    .pipe(extend('exif.json', true, '    '))
     .pipe(gulp.dest('builds/development'));
+});
+
+gulp.task('htmlmin', () => {
+    gulp.src('builds/development/*.html')
+    .pipe(htmlmin({
+        collapseWhitespace: true
+    }))
+    .pipe(gulp.dest('builds/production'))
 });
